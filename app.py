@@ -556,20 +556,19 @@ def sentiment_tags(sentiments):
 
 st.markdown("""
 <div class="app-header">
-    <div class="brand">
-        <div class="brand-icon">⚡</div>
-        <div>
-            <div class="brand-title">Review Analyzer Pro</div>
-            <div class="brand-subtitle">
-                Executive NLP Intelligence System · Thai / English Multi-Topic Pipeline
-            </div>
-        </div>
-    </div>
-
-    <div class="status-badge">
-        <span style="display:inline-block; width:8px; height:8px; background:#34d399; border-radius:50%;"></span>
-        NLP Engine Active
-    </div>
+<div class="brand">
+<div class="brand-icon">⚡</div>
+<div>
+<div class="brand-title">Review Analyzer Pro</div>
+<div class="brand-subtitle">
+Executive NLP Intelligence System · Thai / English Multi-Topic Pipeline
+</div>
+</div>
+</div>
+<div class="status-badge">
+<span style="display:inline-block; width:8px; height:8px; background:#34d399; border-radius:50%;"></span>
+NLP Engine Active
+</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -896,19 +895,7 @@ with tab_batch:
 # ============================================================
 
 st.markdown("""
-<div class="app-header">
-<div class="brand">
-<div class="brand-icon">⚡</div>
-<div>
-<div class="brand-title">Review Analyzer Pro</div>
-<div class="brand-subtitle">
-Executive NLP Intelligence System · Thai / English Multi-Topic Pipeline
-</div>
-</div>
-</div>
-<div class="status-badge">
-<span style="display:inline-block; width:8px; height:8px; background:#34d399; border-radius:50%;"></span>
-NLP Engine Active
-</div>
+<div style="text    -align:center; color:#475569; font-size:12px; margin-top:40px; padding-top:20px; border-top: 1px solid rgba(255,255,255,0.05);">
+    Review Analyzer Pro · Executive NLP Suite · Built with PyThaiNLP & Streamlit
 </div>
 """, unsafe_allow_html=True)
