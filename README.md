@@ -1,30 +1,21 @@
-# thai-review-nlp-app
-# 🍔 Food & Product Review NLP Extractor
+# ⚡ Review Analyzer Pro
+### 🍔 Food & Product Review NLP Extractor (Executive Dark Edition)
 
-ระบบ Web Application สำหรับคัดกรองและวิเคราะห์ข้อความรีวิวอาหารและสินค้า พัฒนาด้วย Python, PyThaiNLP และ Streamlit
-
-## 📌 คุณสมบัติของระบบ (NLP Pipeline)
-1. **Regex & Cleansing**: ลบ URL, เบอร์โทรศัพท์, โน้ต/สัญลักษณ์รบกวน และปรับคำลากเสียง (เช่น `อร่อยยยย` -> `อร่อย`)
-2. **Tokenization & Normalization**: ตัดคำภาษาไทย ลบ Stopwords และจัดการสระซ้อน
-3. **Topic Identification**: จัดกลุ่มหัวข้อรีวิวอัตโนมัติ (รสชาติ/อาหาร, การบริการ, ราคา, บรรยากาศ)
-4. **POS & Entity Extraction**: ดึงคำนาม (เมนู/สถานที่) และคำบรรยาย (คำคุณศัพท์)
+ระบบ Web Application สำหรับคัดกรอง สกัดข้อมูล และวิเคราะห์ข้อความรีวิวอาหารและสินค้าแบบสองภาษา (ไทย/อังกฤษ) พัฒนาด้วย Python, PyThaiNLP และ Streamlit มาพร้อมกับอินเทอร์เฟซสไตล์ Executive Dark Mode ที่หรูหราและสบายตา
 
 ---
 
-## 🤖 AI Prompts ที่ใช้ในการพัฒนาระบบ
-ตัวอย่าง Prompt ที่ใช้สั่งการ AI Assistant ในการช่วยเขียนโปรแกรม:
+## 📌 คุณสมบัติของระบบ (NLP Pipeline & Features)
 
-> **Prompt 1 (สร้าง Pipeline NLP):**
-> "ช่วยเขียนฟังก์ชัน Python สำหรับทำ Text Cleansing ข้อความภาษาไทย โดยใช้ Regex ลบ URL, เบอร์โทรศัพท์ และลดคำลากเสียง เช่น 'อร่อยยย' ให้เหลือ 'อร่อย' พร้อมทั้งใช้ PyThaiNLP ตัดคำและลบ Stopwords"
-
-> **Prompt 2 (การทำ UI ด้วย Streamlit):**
-> "เขียนโค้ด Streamlit แสดงผลเป็น 2 Tabs โดย Tab แรกรับข้อความ Input เดี่ยวเพื่อแสดงผลการวิเคราะห์ NLP แต่ละ Step ส่วน Tab 2 สามารถ Upload ไฟล์ CSV แล้วรัน Batch Processing พร้อมปุ่มดาวน์โหลดผลลัพธ์ CSV"
+1. **Regex & Cleansing:** ลบ URL, เบอร์โทรศัพท์, แฮชแท็ก, สัญลักษณ์รบกวน และปรับคำลากเสียง (เช่น `อร่อยยยย` -> `อร่อย`) พร้อมปรับเป็นตัวพิมพ์เล็กสำหรับภาษาอังกฤษ
+2. **Tokenization & Normalization:** ตัดคำภาษาไทย/อังกฤษ ด้วย PyThaiNLP (Engine `newmm`) จัดการสระซ้อน และลบคำหยุด (Stopwords)
+3. **Topic Identification:** จัดกลุ่มหัวข้อรีวิวอัตโนมัติแบบ Multi-topic (รสชาติ/อาหาร, การบริการ, ราคา/ความคุ้มค่า, บรรยากาศ/สถานที่)
+4. **POS & Entity Extraction:** ดึงคำนาม (เมนู/สถานที่) และคำบรรยาย (คำคุณศัพท์) ด้วย Part-of-Speech Tagging
+5. **Batch Processing & Executive Dashboard:** รองรับการประมวลผลไฟล์ CSV พร้อมแสดงผลสรุป กราฟสถิติ และปุ่มส่งออกรายงาน (Export CSV)
 
 ---
 
-## 🛠️ วิธีการติดตั้งและใช้งานบนเครื่องท้องถิ่น (Local Machine)
+## ⚙️ การทำงานของระบบ (NLP Pipeline Workflow)
 
-1. Clone Repository นี้:
-   ```bash
-   git clone <YOUR_REPOSITORY_URL>
-   cd <REPOSITORY_FOLDER>
+```text
+Input Text ──► 1. Cleansing ──► 2. Tokenization ──► 3. POS Extraction ──► 4. Topic & Sentiment ──► Dashboard Output
