@@ -12,27 +12,29 @@ from pythainlp.util import normalize
 # ============================================================
 
 st.set_page_config(
-    page_title="Review Analyzer",
-    page_icon="🍔",
+    page_title="Review Analyzer Pro",
+    page_icon="⚡",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
 
 # ============================================================
-# MODERN LIGHT UI
+# EXECUTIVE DARK UI / LUXURY THEME CSS
 # ============================================================
 
 st.markdown("""
 <style>
+    /* Main Background & Base Typography */
     .stApp {
-        background: #f7f8fa;
-        color: #1f2937;
+        background: linear-gradient(135deg, #0b0f17 0%, #111827 50%, #0f172a 100%);
+        color: #f1f5f9;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     .main .block-container {
-        max-width: 1400px;
-        padding-top: 2rem;
+        max-width: 1380px;
+        padding-top: 1.5rem;
         padding-bottom: 3rem;
     }
 
@@ -40,238 +42,303 @@ st.markdown("""
         visibility: hidden;
     }
 
-    h1, h2, h3 {
-        color: #111827 !important;
-        letter-spacing: -0.02em;
+    /* Headings */
+    h1, h2, h3, h4 {
+        color: #f8fafc !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.025em;
     }
 
-    p, label, .stMarkdown {
-        color: #4b5563;
+    p, span, label, .stMarkdown {
+        color: #94a3b8;
     }
 
+    /* Header Bar */
     .app-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 16px 24px;
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 18px;
         margin-bottom: 1.5rem;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
 
     .brand {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 16px;
     }
 
     .brand-icon {
         width: 48px;
         height: 48px;
-        border-radius: 14px;
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 25px;
-        box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+        font-size: 24px;
+        box-shadow: 0 0 15px rgba(56, 189, 248, 0.35);
     }
 
     .brand-title {
-        font-size: 25px;
-        font-weight: 700;
-        color: #111827;
+        font-size: 22px;
+        font-weight: 800;
+        color: #f8fafc;
+        letter-spacing: -0.02em;
         margin: 0;
     }
 
     .brand-subtitle {
-        font-size: 13px;
-        color: #6b7280;
+        font-size: 12px;
+        color: #64748b;
         margin-top: 2px;
     }
 
     .status-badge {
-        background: #ecfdf5;
-        color: #047857;
-        border: 1px solid #a7f3d0;
-        padding: 6px 12px;
+        background: rgba(16, 185, 129, 0.1);
+        color: #34d399;
+        border: 1px solid rgba(52, 211, 153, 0.25);
+        padding: 6px 14px;
         border-radius: 999px;
         font-size: 12px;
         font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 0 10px rgba(52, 211, 153, 0.15);
     }
 
+    /* Executive Cards */
     .card {
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
+        background: rgba(30, 41, 59, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.07);
         border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 3px 12px rgba(0,0,0,0.035);
+        padding: 20px 24px;
         margin-bottom: 16px;
+        backdrop-filter: blur(8px);
     }
 
     .card-title {
         font-size: 16px;
         font-weight: 700;
-        color: #111827;
+        color: #f8fafc;
         margin-bottom: 4px;
     }
 
     .card-description {
         font-size: 13px;
-        color: #6b7280;
-        margin-bottom: 16px;
+        color: #64748b;
     }
 
+    /* Metric Cards */
     .metric-card {
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 14px;
         padding: 18px;
-        min-height: 105px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.025);
+        min-height: 100px;
+        transition: all 0.2s ease;
+    }
+
+    .metric-card:hover {
+        border-color: rgba(56, 189, 248, 0.3);
+        transform: translateY(-2px);
     }
 
     .metric-label {
         font-size: 12px;
-        color: #6b7280;
-        margin-bottom: 7px;
+        font-weight: 600;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 6px;
     }
 
     .metric-value {
-        font-size: 23px;
-        font-weight: 700;
-        color: #111827;
+        font-size: 24px;
+        font-weight: 800;
+        color: #f8fafc;
         word-break: break-word;
     }
 
     .metric-helper {
         font-size: 11px;
-        color: #9ca3af;
+        color: #475569;
         margin-top: 4px;
     }
 
+    /* Section Styling */
     .section-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 24px 0 12px 0;
+        margin: 28px 0 14px 0;
     }
 
     .section-title {
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 700;
-        color: #111827;
+        color: #f8fafc;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
     .section-caption {
         font-size: 12px;
-        color: #9ca3af;
+        color: #64748b;
     }
 
     .result-card {
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 14px;
-        padding: 18px;
+        padding: 20px;
         height: 100%;
     }
 
     .result-title {
         font-weight: 700;
-        color: #111827;
-        font-size: 15px;
+        color: #cbd5e1;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
 
+    /* Badges & Tags */
     .tag {
         display: inline-block;
-        padding: 6px 10px;
-        border-radius: 999px;
-        margin: 3px 4px 3px 0;
+        padding: 6px 12px;
+        border-radius: 8px;
+        margin: 4px 6px 4px 0;
         font-size: 12px;
         font-weight: 600;
+        letter-spacing: 0.01em;
     }
 
     .tag-topic {
-        background: #eff6ff;
-        color: #2563eb;
-        border: 1px solid #dbeafe;
+        background: rgba(56, 189, 248, 0.12);
+        color: #38bdf8;
+        border: 1px solid rgba(56, 189, 248, 0.25);
     }
 
     .tag-positive {
-        background: #ecfdf5;
-        color: #047857;
-        border: 1px solid #d1fae5;
+        background: rgba(16, 185, 129, 0.12);
+        color: #34d399;
+        border: 1px solid rgba(52, 211, 153, 0.25);
     }
 
     .tag-negative {
-        background: #fff1f2;
-        color: #be123c;
-        border: 1px solid #ffe4e6;
+        background: rgba(244, 63, 94, 0.12);
+        color: #fb7185;
+        border: 1px solid rgba(251, 113, 133, 0.25);
     }
 
     .tag-neutral {
-        background: #f3f4f6;
-        color: #6b7280;
-        border: 1px solid #e5e7eb;
+        background: rgba(148, 163, 184, 0.1);
+        color: #94a3b8;
+        border: 1px solid rgba(148, 163, 184, 0.2);
     }
 
+    /* Streamlit Components Dark Overrides */
     .stTextArea textarea {
         border-radius: 12px !important;
-        border: 1px solid #d1d5db !important;
-        background: #ffffff !important;
-        color: #111827 !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        background: rgba(15, 23, 42, 0.8) !important;
+        color: #f8fafc !important;
         padding: 14px !important;
     }
 
     .stTextArea textarea:focus {
-        border-color: #93c5fd !important;
-        box-shadow: 0 0 0 3px rgba(59,130,246,0.10) !important;
+        border-color: #38bdf8 !important;
+        box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2) !important;
     }
 
     .stButton > button {
-        border-radius: 10px;
-        min-height: 42px;
-        font-weight: 600;
-        border: 1px solid #d1d5db;
+        border-radius: 10px !important;
+        min-height: 42px !important;
+        font-weight: 600 !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        background: rgba(30, 41, 59, 0.8) !important;
+        color: #f8fafc !important;
+        transition: all 0.2s ease !important;
     }
 
+    .stButton > button:hover {
+        background: rgba(51, 65, 85, 1) !important;
+        border-color: rgba(255, 255, 255, 0.25) !important;
+        color: #ffffff !important;
+    }
+
+    .stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+        border: none !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35) !important;
+    }
+
+    .stButton > button[kind="primary"]:hover {
+        background: linear-gradient(135deg, #0369a1 0%, #075985 100%) !important;
+        box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5) !important;
+    }
+
+    /* Tabs Styling */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 6px;
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
-        padding: 5px;
-        border-radius: 12px;
+        gap: 8px;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 6px;
+        border-radius: 14px;
     }
 
     .stTabs [data-baseweb="tab"] {
-        border-radius: 8px;
-        padding: 8px 16px;
-        color: #6b7280;
+        border-radius: 10px;
+        padding: 8px 20px;
+        color: #64748b;
         font-size: 13px;
+        font-weight: 600;
+        border: none !important;
     }
 
     .stTabs [aria-selected="true"] {
-        background: #f3f4f6;
-        color: #111827 !important;
-        font-weight: 600;
+        background: rgba(30, 41, 59, 1) !important;
+        color: #38bdf8 !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
+    /* File Uploader */
     [data-testid="stFileUploader"] {
-        background: #ffffff;
-        border: 1px dashed #d1d5db;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px dashed rgba(255, 255, 255, 0.15);
         border-radius: 14px;
-        padding: 10px;
+        padding: 16px;
     }
 
+    /* Dataframe & Expanders */
     [data-testid="stDataFrame"] {
         border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
         overflow: hidden;
     }
 
+    .stExpander {
+        background: rgba(15, 23, 42, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 12px !important;
+        margin-bottom: 10px !important;
+    }
+
     hr {
-        border-color: #e5e7eb !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
     }
 
     .helper {
-        color: #9ca3af;
+        color: #64748b;
         font-size: 12px;
     }
 </style>
@@ -366,18 +433,11 @@ def clean_text(text: str) -> str:
     if not isinstance(text, str):
         return ""
 
-    # ลบ URL และเบอร์โทรศัพท์
     text = re.sub(r'http\S+|www\.\S+', '', text)
     text = re.sub(r'(\d{2,4}[-\s]?\d{3,4}[-\s]?\d{3,4})', '', text)
     text = re.sub(r'[@#]\w+', '', text)
-
-    # แปลงตัวอักษรภาษาอังกฤษเป็นตัวพิมพ์เล็ก
     text = text.lower()
-
-    # ลดคำลากเสียง
     text = re.sub(r'(.)\1{2,}', r'\1', text)
-
-    # Normalize สระภาษาไทย
     text = normalize(text)
 
     return text.strip()
@@ -471,16 +531,13 @@ def metric_card(label, value, helper=""):
 
 def topic_tags(topics):
     html = ""
-
     for topic in topics:
         html += f'<span class="tag tag-topic">{topic}</span>'
-
     return html
 
 
 def sentiment_tags(sentiments):
     html = ""
-
     for sentiment in sentiments:
         if "คำชม" in sentiment:
             css_class = "tag-positive"
@@ -490,7 +547,6 @@ def sentiment_tags(sentiments):
             css_class = "tag-neutral"
 
         html += f'<span class="tag {css_class}">{sentiment}</span>'
-
     return html
 
 
@@ -501,17 +557,18 @@ def sentiment_tags(sentiments):
 st.markdown("""
 <div class="app-header">
     <div class="brand">
-        <div class="brand-icon">🍔</div>
+        <div class="brand-icon">⚡</div>
         <div>
-            <div class="brand-title">Review Analyzer</div>
+            <div class="brand-title">Review Analyzer Pro</div>
             <div class="brand-subtitle">
-                ระบบคัดกรองและวิเคราะห์ข้อความรีวิวอาหารและสินค้า · Thai / English NLP
+                Executive NLP Intelligence System · Thai / English Multi-Topic Pipeline
             </div>
         </div>
     </div>
 
     <div class="status-badge">
-        ● NLP Engine Ready
+        <span style="display:inline-block; width:8px; height:8px; background:#34d399; border-radius:50%;"></span>
+        NLP Engine Active
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -522,8 +579,8 @@ st.markdown("""
 # ============================================================
 
 tab_single, tab_batch = st.tabs([
-    "🔍  วิเคราะห์ข้อความเดี่ยว",
-    "📂  วิเคราะห์ไฟล์ CSV"
+    "🔍  วิเคราะห์ข้อความเดี่ยว (Single Review)",
+    "📂  วิเคราะห์ไฟล์ชุด (Batch CSV Processing)"
 ])
 
 
@@ -535,33 +592,45 @@ with tab_single:
 
     st.markdown("""
     <div class="card">
-        <div class="card-title">
-            วิเคราะห์รีวิวแบบข้อความเดียว
-        </div>
+        <div class="card-title">Single Review Analytics</div>
         <div class="card-description">
-            ป้อนข้อความรีวิว แล้วระบบจะทำความสะอาดข้อความ ตัดคำ
-            วิเคราะห์หัวข้อ ความรู้สึก และ Key Elements
+            ป้อนข้อความรีวิวเพื่อทำ Cleaning, Tokenization, POS Tagging, Topic Classification และ Sentiment Analysis แบบเรียลไทม์
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    user_input = st.text_area(
-        "ข้อความรีวิว",
-        value=(
+    # State for quick sample inserts
+    if "input_text" not in st.session_state:
+        st.session_state["input_text"] = (
             "The food was very delicious and fresh! "
             "But the service was extremely slow. "
             "Call 081-234-5678 https://example.com"
-        ),
-        height=140,
+        )
+
+    # Quick Sample Action Buttons (FEATURE ENHANCEMENT)
+    col_sample1, col_sample2, _ = st.columns([1.5, 1.5, 5])
+    with col_sample1:
+        if st.button("📝 โหลดตัวอย่างภาษาไทย"):
+            st.session_state["input_text"] = "อาหารอร่อยมาก กุ้งสดหวาน คุ้มราคา แต่พนักงานบริการช้านิดหน่อย ร้านสะอาดดีครับ"
+            st.rerun()
+    with col_sample2:
+        if st.button("🌐 โหลดตัวอย่าง English"):
+            st.session_state["input_text"] = "The pork soup was amazing and high quality! Highly recommended, cheap price."
+            st.rerun()
+
+    user_input = st.text_area(
+        "ข้อความรีวิว",
+        value=st.session_state["input_text"],
+        height=130,
         label_visibility="collapsed",
         placeholder="พิมพ์ข้อความรีวิวที่นี่..."
     )
 
-    col_button, col_hint = st.columns([1, 4])
+    col_button, col_hint = st.columns([1.2, 4])
 
     with col_button:
         analyze_button = st.button(
-            "✨ วิเคราะห์ข้อความ",
+            "🚀 วิเคราะห์ข้อความ",
             type="primary",
             use_container_width=True
         )
@@ -569,7 +638,7 @@ with tab_single:
     with col_hint:
         st.markdown(
             '<div class="helper" style="padding-top:12px;">'
-            'รองรับภาษาไทยและภาษาอังกฤษ'
+            'รองรับการประมวลผลข้อความผสม TH/EN แบบอัตโนมัติ'
             '</div>',
             unsafe_allow_html=True
         )
@@ -580,28 +649,16 @@ with tab_single:
             st.warning("กรุณากรอกข้อความก่อนเริ่มวิเคราะห์")
 
         else:
-
-            # 1. Cleansing
+            # Pipeline Steps
             cleansed = clean_text(user_input)
-
-            # 2. Tokenization
             raw_tokens, filtered_tokens = process_tokens(cleansed)
-
-            # 3. POS / Entities
-            pos_tags, nouns, adjectives = extract_pos_and_entities(
-                filtered_tokens
-            )
-
-            # 4. Topic / Sentiment
-            topics, sentiments = classify_topics_and_sentiment(
-                filtered_tokens
-            )
+            pos_tags, nouns, adjectives = extract_pos_and_entities(filtered_tokens)
+            topics, sentiments = classify_topics_and_sentiment(filtered_tokens)
 
             st.markdown("""
             <div class="section-header">
                 <div>
-                    <div class="section-title">ผลการวิเคราะห์</div>
-                    <div class="section-caption">Analysis Summary</div>
+                    <div class="section-title">📊 สรุปผลการวิเคราะห์ (Analytics Overview)</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -609,132 +666,62 @@ with tab_single:
             m1, m2, m3, m4 = st.columns(4)
 
             with m1:
-                st.markdown(
-                    metric_card(
-                        "จำนวนคำก่อนกรอง",
-                        len(raw_tokens),
-                        "Raw tokens"
-                    ),
-                    unsafe_allow_html=True
-                )
-
+                st.markdown(metric_card("Raw Tokens", len(raw_tokens), "จำนวนคำก่อนกรอง"), unsafe_allow_html=True)
             with m2:
-                st.markdown(
-                    metric_card(
-                        "จำนวนคำหลังกรอง",
-                        len(filtered_tokens),
-                        "After stopwords"
-                    ),
-                    unsafe_allow_html=True
-                )
-
+                st.markdown(metric_card("Filtered Tokens", len(filtered_tokens), "หลังตัด Stopwords"), unsafe_allow_html=True)
             with m3:
-                st.markdown(
-                    metric_card(
-                        "หัวข้อที่พบ",
-                        len(topics),
-                        "Detected topics"
-                    ),
-                    unsafe_allow_html=True
-                )
-
+                st.markdown(metric_card("Topics Detected", len(topics), "หัวข้อที่พบ"), unsafe_allow_html=True)
             with m4:
-                st.markdown(
-                    metric_card(
-                        "Sentiment ที่พบ",
-                        len(sentiments),
-                        "Sentiment signals"
-                    ),
-                    unsafe_allow_html=True
-                )
-
-            st.markdown(
-                '<div class="section-title" style="margin-top:25px;">'
-                'ภาพรวมความคิดเห็น'
-                '</div>',
-                unsafe_allow_html=True
-            )
+                st.markdown(metric_card("Sentiment Signals", len(sentiments), "สัญญาณความรู้สึก"), unsafe_allow_html=True)
 
             c1, c2 = st.columns(2)
 
             with c1:
                 st.markdown("""
                 <div class="result-card">
-                    <div class="result-title">🏷️ หัวข้อที่เกี่ยวข้อง</div>
-                    <div style="margin-top:12px;">
+                    <div class="result-title">🏷️ หัวข้อที่เกี่ยวข้อง (Topics)</div>
+                    <div style="margin-top:14px;">
                 """, unsafe_allow_html=True)
-
-                st.markdown(
-                    topic_tags(topics),
-                    unsafe_allow_html=True
-                )
-
+                st.markdown(topic_tags(topics), unsafe_allow_html=True)
                 st.markdown("</div></div>", unsafe_allow_html=True)
 
             with c2:
                 st.markdown("""
                 <div class="result-card">
-                    <div class="result-title">💬 Sentiment</div>
-                    <div style="margin-top:12px;">
+                    <div class="result-title">💬 ทัศนคติที่พบ (Sentiment)</div>
+                    <div style="margin-top:14px;">
                 """, unsafe_allow_html=True)
-
-                st.markdown(
-                    sentiment_tags(sentiments),
-                    unsafe_allow_html=True
-                )
-
+                st.markdown(sentiment_tags(sentiments), unsafe_allow_html=True)
                 st.markdown("</div></div>", unsafe_allow_html=True)
 
-            st.markdown(
-                '<div class="section-title" style="margin-top:25px;">'
-                'รายละเอียดการประมวลผล'
-                '</div>',
-                unsafe_allow_html=True
-            )
+            st.markdown("""
+            <div class="section-header">
+                <div class="section-title">⚙️ รายละเอียดเชิงลึก NLP (Detailed Execution)</div>
+            </div>
+            """, unsafe_allow_html=True)
 
             d1, d2 = st.columns(2)
 
             with d1:
-
-                with st.expander(
-                    "🧹 Cleansing — ข้อความหลังทำความสะอาด",
-                    expanded=True
-                ):
+                with st.expander("🧹 Text Cleansing Result", expanded=True):
                     st.code(cleansed, language=None)
 
-                with st.expander("✂️ Tokenization — ผลการตัดคำ"):
-
-                    st.write("**คำทั้งหมด**")
+                with st.expander("✂️ Tokenization Details"):
+                    st.write("**คำทั้งหมด (Raw Tokens)**")
                     st.write(raw_tokens)
-
-                    st.write("**หลังลบ Stopwords**")
+                    st.write("**คำหลังลบ Stopwords (Filtered)**")
                     st.write(filtered_tokens)
 
             with d2:
-
-                with st.expander(
-                    "📌 Key Elements — POS Tagging",
-                    expanded=True
-                ):
-
-                    st.write("**Nouns / Entities**")
+                with st.expander("📌 Key Extracted Elements (POS)", expanded=True):
+                    st.write("**คำนาม / Entities (Nouns)**")
                     st.write(nouns if nouns else "-")
-
-                    st.write("**Adjectives**")
+                    st.write("**คำคุณศัพท์ (Adjectives)**")
                     st.write(adjectives if adjectives else "-")
 
-                with st.expander("🔤 POS Tags — รายละเอียด"):
-
-                    pos_df = pd.DataFrame(
-                        pos_tags,
-                        columns=["คำ", "POS Tag"]
-                    )
-
-                    st.dataframe(
-                        pos_df,
-                        use_container_width=True,
-                        hide_index=True
-                    )
+                with st.expander("🔤 Part-of-Speech Tagging Full Table"):
+                    pos_df = pd.DataFrame(pos_tags, columns=["คำ", "POS Tag"])
+                    st.dataframe(pos_df, use_container_width=True, hide_index=True)
 
 
 # ============================================================
@@ -745,126 +732,83 @@ with tab_batch:
 
     st.markdown("""
     <div class="card">
-        <div class="card-title">
-            วิเคราะห์รีวิวจำนวนมาก
-        </div>
+        <div class="card-title">Batch Analytics & Reporting</div>
         <div class="card-description">
-            อัปโหลดไฟล์ CSV ที่มีคอลัมน์ <b>review_text</b>
-            เพื่อวิเคราะห์หลายรายการพร้อมกัน
+            อัปโหลดไฟล์ CSV ที่มีคอลัมน์ <b>review_text</b> เพื่อทำการวิเคราะห์เชิงปริมาณ รวบรวมสถิติ และส่งออกรายงาน
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    uploaded_file = st.file_uploader(
-        "อัปโหลด CSV",
-        type=["csv"],
-        label_visibility="collapsed"
-    )
+    # Sample CSV Generator Helper (FEATURE ENHANCEMENT)
+    col_upload, col_sample_download = st.columns([3, 1])
+
+    with col_sample_download:
+        sample_df = pd.DataFrame({
+            "review_text": [
+                "อาหารอร่อยมาก สดใหม่ แต่ราคาสูงไปนิด",
+                "บริการแย่ ช้ามาก พนักงานพูดจาไม่ดี",
+                "ร้านสวย สะอาด บรรยากาศดี มีที่จอดรถสะดวก",
+                "Great food and cheap price! Highly recommended."
+            ]
+        })
+        sample_csv = sample_df.to_csv(index=False).encode("utf-8-sig")
+        st.download_button(
+            "📥 โหลด CSV ตัวอย่าง",
+            sample_csv,
+            "sample_reviews.csv",
+            "text/csv",
+            use_container_width=True
+        )
+
+    with col_upload:
+        uploaded_file = st.file_uploader(
+            "อัปโหลด CSV",
+            type=["csv"],
+            label_visibility="collapsed"
+        )
 
     if uploaded_file is not None:
-
         try:
             df = pd.read_csv(uploaded_file)
-
         except Exception as e:
             st.error(f"ไม่สามารถอ่านไฟล์ CSV ได้: {e}")
             df = None
 
         if df is not None:
-
             if df.empty:
-
                 st.warning("ไฟล์ CSV ไม่มีข้อมูล")
-
             elif "review_text" not in df.columns:
-
-                st.error(
-                    "ไม่พบคอลัมน์ 'review_text' "
-                    "กรุณาตรวจสอบชื่อคอลัมน์"
-                )
-
+                st.error("ไม่พบคอลัมน์ 'review_text' กรุณาตรวจสอบชื่อคอลัมน์ในไฟล์ CSV")
             else:
-
-                st.markdown(
-                    '<div class="section-title" '
-                    'style="margin-top:22px;">'
-                    'ไฟล์ที่อัปโหลด'
-                    '</div>',
-                    unsafe_allow_html=True
-                )
-
                 m1, m2, m3 = st.columns(3)
+                missing = df["review_text"].isna().sum()
 
                 with m1:
-                    st.markdown(
-                        metric_card(
-                            "จำนวนรายการ",
-                            f"{len(df):,}",
-                            "Reviews"
-                        ),
-                        unsafe_allow_html=True
-                    )
-
+                    st.markdown(metric_card("Total Reviews", f"{len(df):,}", "จำนวนรายการในไฟล์"), unsafe_allow_html=True)
                 with m2:
-                    st.markdown(
-                        metric_card(
-                            "จำนวนคอลัมน์",
-                            len(df.columns),
-                            "Columns"
-                        ),
-                        unsafe_allow_html=True
-                    )
-
+                    st.markdown(metric_card("Columns", len(df.columns), "จำนวนคอลัมน์"), unsafe_allow_html=True)
                 with m3:
-                    missing = df["review_text"].isna().sum()
+                    st.markdown(metric_card("Missing Values", missing, "รายการที่ไม่มีข้อความ"), unsafe_allow_html=True)
 
-                    st.markdown(
-                        metric_card(
-                            "ข้อมูลว่าง",
-                            missing,
-                            "Missing review text"
-                        ),
-                        unsafe_allow_html=True
-                    )
-
-                with st.expander(
-                    "👀 ดูตัวอย่างข้อมูล",
-                    expanded=True
-                ):
-                    st.dataframe(
-                        df.head(5),
-                        use_container_width=True,
-                        hide_index=True
-                    )
+                with st.expander("👀 ดูตัวอย่างข้อมูล (Preview Dataset)", expanded=False):
+                    st.dataframe(df.head(5), use_container_width=True, hide_index=True)
 
                 process_batch = st.button(
-                    "⚡ ประมวลผลทั้งไฟล์",
+                    "⚡ ประมวลผลทั้งไฟล์ (Start Batch Processing)",
                     type="primary",
                     use_container_width=True
                 )
 
                 if process_batch:
-
-                    progress = st.progress(
-                        0,
-                        text="กำลังวิเคราะห์ข้อมูล..."
-                    )
-
+                    progress = st.progress(0, text="กำลังวิเคราะห์ข้อมูล...")
                     results = []
                     total = len(df)
 
                     for index, text in enumerate(df["review_text"]):
-
-                        # รองรับ cell ว่างให้สะอาดกว่าเดิม
                         original_text = "" if pd.isna(text) else str(text)
-
                         cleaned = clean_text(original_text)
-
                         _, filtered = process_tokens(cleaned)
-
-                        topics, sentiments = (
-                            classify_topics_and_sentiment(filtered)
-                        )
+                        topics, sentiments = classify_topics_and_sentiment(filtered)
 
                         results.append({
                             "ข้อความเดิม": original_text,
@@ -873,213 +817,75 @@ with tab_batch:
                             "ข้อสังเกต Sentiment": " | ".join(sentiments)
                         })
 
-                        progress.progress(
-                            (index + 1) / total,
-                            text=f"กำลังวิเคราะห์ {index + 1:,} / {total:,}"
-                        )
+                        progress.progress((index + 1) / total, text=f"กำลังวิเคราะห์ {index + 1:,} / {total:,}")
 
                     progress.empty()
-
                     result_df = pd.DataFrame(results)
+                    st.success(f"วิเคราะห์ข้อมูลเสร็จสิ้นเรียบร้อยแล้ว {len(result_df):,} รายการ")
 
-                    st.success(
-                        f"วิเคราะห์ข้อมูลเสร็จแล้ว {len(result_df):,} รายการ"
-                    )
-
-                    # ------------------------------------------------
-                    # DASHBOARD
-                    # ------------------------------------------------
-
+                    # Dashboard Summary
                     st.markdown("""
                     <div class="section-header">
-                        <div>
-                            <div class="section-title">
-                                📊 Analysis Dashboard
-                            </div>
-                            <div class="section-caption">
-                                ภาพรวมผลการวิเคราะห์ทั้งหมด
-                            </div>
-                        </div>
+                        <div class="section-title">📈 Executive Dashboard</div>
                     </div>
                     """, unsafe_allow_html=True)
 
                     all_topics = [
                         t.strip()
                         for sublist in result_df["หัวข้อ"].str.split(",")
-                        for t in sublist
-                        if t.strip()
+                        for t in sublist if t.strip()
                     ]
-
                     topic_counts = pd.Series(all_topics).value_counts()
+                    top_topic = topic_counts.index[0] if len(topic_counts) > 0 else "-"
 
-                    top_topic = (
-                        topic_counts.index[0]
-                        if len(topic_counts) > 0
-                        else "-"
-                    )
-
-                    pos_count = (
-                        result_df["ข้อสังเกต Sentiment"]
-                        .str.contains("คำชม", na=False)
-                        .sum()
-                    )
-
-                    neg_count = (
-                        result_df["ข้อสังเกต Sentiment"]
-                        .str.contains("คำติ", na=False)
-                        .sum()
-                    )
-
-                    # Neutral ที่ไม่พบ positive/negative signal
-                    neutral_count = max(
-                        len(result_df) - pos_count - neg_count,
-                        0
-                    )
+                    pos_count = result_df["ข้อสังเกต Sentiment"].str.contains("คำชม", na=False).sum()
+                    neg_count = result_df["ข้อสังเกต Sentiment"].str.contains("คำติ", na=False).sum()
+                    neutral_count = max(len(result_df) - pos_count - neg_count, 0)
 
                     m1, m2, m3, m4 = st.columns(4)
-
                     with m1:
-                        st.markdown(
-                            metric_card(
-                                "รีวิวทั้งหมด",
-                                f"{len(result_df):,}",
-                                "Total reviews"
-                            ),
-                            unsafe_allow_html=True
-                        )
-
+                        st.markdown(metric_card("Processed Reviews", f"{len(result_df):,}", "รายการทั้งหมด"), unsafe_allow_html=True)
                     with m2:
-                        st.markdown(
-                            metric_card(
-                                "หัวข้อหลัก",
-                                top_topic,
-                                "Most detected topic"
-                            ),
-                            unsafe_allow_html=True
-                        )
-
+                        st.markdown(metric_card("Top Topic", top_topic, "หัวข้อที่ถูกพูดถึงมากที่สุด"), unsafe_allow_html=True)
                     with m3:
-                        st.markdown(
-                            metric_card(
-                                "คำชม",
-                                f"{pos_count:,}",
-                                "Positive signals"
-                            ),
-                            unsafe_allow_html=True
-                        )
-
+                        st.markdown(metric_card("Positive Signals", f"{pos_count:,}", "จำนวนคำชมที่พบ"), unsafe_allow_html=True)
                     with m4:
-                        st.markdown(
-                            metric_card(
-                                "คำติ",
-                                f"{neg_count:,}",
-                                "Negative signals"
-                            ),
-                            unsafe_allow_html=True
-                        )
+                        st.markdown(metric_card("Negative Signals", f"{neg_count:,}", "จำนวนคำติที่พบ"), unsafe_allow_html=True)
 
-                    # ------------------------------------------------
-                    # CHARTS
-                    # ------------------------------------------------
-
-                    st.markdown(
-                        '<div class="section-title" '
-                        'style="margin-top:25px;">'
-                        'แนวโน้มจากข้อมูล'
-                        '</div>',
-                        unsafe_allow_html=True
-                    )
-
+                    # Charts
                     chart1, chart2 = st.columns(2)
-
                     with chart1:
-
-                        st.markdown("""
-                        <div class="card">
-                            <div class="card-title">
-                                📈 รีวิวตามหัวข้อ
-                            </div>
-                            <div class="card-description">
-                                จำนวนครั้งที่แต่ละ Topic ถูกตรวจพบ
-                            </div>
-                        """, unsafe_allow_html=True)
-
+                        st.markdown('<div class="card"><div class="card-title">📊 สัดส่วนหัวข้อที่ถูกพูดถึง</div>', unsafe_allow_html=True)
                         if not topic_counts.empty:
                             st.bar_chart(topic_counts)
                         else:
-                            st.info("ยังไม่มีข้อมูล Topic")
-
+                            st.info("ไม่พบข้อมูล Topic")
                         st.markdown("</div>", unsafe_allow_html=True)
 
                     with chart2:
-
-                        st.markdown("""
-                        <div class="card">
-                            <div class="card-title">
-                                💬 Sentiment Overview
-                            </div>
-                            <div class="card-description">
-                                เปรียบเทียบคำชม คำติ และ Neutral
-                            </div>
-                        """, unsafe_allow_html=True)
-
+                        st.markdown('<div class="card"><div class="card-title">💬 Sentiment Overview</div>', unsafe_allow_html=True)
                         sentiment_summary = pd.DataFrame(
-                            {
-                                "จำนวน": [
-                                    pos_count,
-                                    neg_count,
-                                    neutral_count
-                                ]
-                            },
-                            index=[
-                                "Positive",
-                                "Negative",
-                                "Neutral"
-                            ]
+                            {"จำนวน": [pos_count, neg_count, neutral_count]},
+                            index=["Positive", "Negative", "Neutral"]
                         )
-
                         st.bar_chart(sentiment_summary)
-
                         st.markdown("</div>", unsafe_allow_html=True)
 
-                    # ------------------------------------------------
-                    # RESULT TABLE
-                    # ------------------------------------------------
-
+                    # Result Data Table
                     st.markdown("""
                     <div class="section-header">
-                        <div>
-                            <div class="section-title">
-                                📋 ผลการวิเคราะห์รายรายการ
-                            </div>
-                            <div class="section-caption">
-                                ตรวจสอบรายละเอียดของแต่ละรีวิว
-                            </div>
-                        </div>
+                        <div class="section-title">📋 ผลการวิเคราะห์รายรายการ</div>
                     </div>
                     """, unsafe_allow_html=True)
 
-                    st.dataframe(
-                        result_df,
-                        use_container_width=True,
-                        hide_index=True,
-                        height=450
-                    )
+                    st.dataframe(result_df, use_container_width=True, hide_index=True, height=400)
 
-                    # ------------------------------------------------
-                    # EXPORT
-                    # ------------------------------------------------
-
-                    csv_data = (
-                        result_df
-                        .to_csv(index=False)
-                        .encode("utf-8-sig")
-                    )
-
+                    # Export Button
+                    csv_data = result_df.to_csv(index=False).encode("utf-8-sig")
                     st.download_button(
-                        "📥 ดาวน์โหลดผลการวิเคราะห์ CSV",
+                        "📥 ดาวน์โหลดรายงานผลการวิเคราะห์ (Download Analytical CSV)",
                         csv_data,
-                        "nlp_analysis_result.csv",
+                        "executive_nlp_analysis.csv",
                         "text/csv",
                         use_container_width=True
                     )
@@ -1090,12 +896,7 @@ with tab_batch:
 # ============================================================
 
 st.markdown("""
-<div style="
-    text-align:center;
-    color:#9ca3af;
-    font-size:11px;
-    margin-top:35px;
-">
-    Review Analyzer · Thai / English NLP
+<div style="text-align:center; color:#475569; font-size:12px; margin-top:40px; padding-top:20px; border-top: 1px solid rgba(255,255,255,0.05);">
+    Review Analyzer Pro · Executive NLP Suite · Built with PyThaiNLP & Streamlit
 </div>
 """, unsafe_allow_html=True)
